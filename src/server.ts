@@ -1,4 +1,4 @@
-import express from "express";
+import express,{ Request, Response} from "express";
 import * as validUrl from "valid-url";
 
 import { filterImageFromURL, deleteLocalFiles } from "./util/util";
@@ -37,8 +37,8 @@ dotenv.config();
 
   //! END @TODO1
 
-  app.get("/filteredimage", async (req, res) => {
-    const imageUrl = req.query.image_url;
+  app.get("/filteredimage", async (req: Request, res: Response) => {
+    const imageUrl:string  = req.query.image_url;
 
     // validate the image_url query parameter
     if (!validUrl.isUri(imageUrl)) {
@@ -50,7 +50,7 @@ dotenv.config();
       const filteredImagePath = await filterImageFromURL(imageUrl);
 
       //send the resulting file in the response
-      res.status(200).sendFile(filteredImagePath, async (error) => {
+        res.status(200).sendFile(filteredImagePath, async (error: string | object) => {
         if (error) {
           res.status(400).send(error);
         }
