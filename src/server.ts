@@ -47,7 +47,7 @@ dotenv.config();
 
     try {
       //call filterImageFromURL(image_url) to filter the image
-      const filteredImagePath = await filterImageFromURL(imageUrl);
+      const filteredImagePath:string = await filterImageFromURL(imageUrl);
 
       //send the resulting file in the response
         res.status(200).sendFile(filteredImagePath, async (error: string | object) => {
@@ -65,7 +65,7 @@ dotenv.config();
 
   // Root Endpoint
   // Displays a simple message to the user
-  app.get("/", async (req, res) => {
+  app.get("/", async (req: Request, res: Response) => {
     res.send("try GET /filteredimage?image_url={{}}");
   });
 
